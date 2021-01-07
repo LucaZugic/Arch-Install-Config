@@ -32,8 +32,8 @@ useradd -m $username
 echo "set passwd for $username"
 passwd $username
 # Edit the following lines if you don't like my software choices
-echo "installing git, xorg, xinit, vim, sudo, feh, neofetch, atom, OpenJDK JRE 11, OpenJDK JDK 11, Tor Browser, Firefox, base-devel, and dhcpcd...
-pacman -S git, xorg xinit vim sudo dhcpcd feh atom jre11-openjdk jdk11-openjdk torbrowser-launcher firefox base-devel
+echo "installing git, xorg, xinit, vim, sudo, feh, OpenJDK JRE 11, OpenJDK JDK 11, base-devel, and dhcpcd...
+pacman -S git, xorg xinit vim sudo dhcpcp jre11-openjdk jdk11-openjdk base-devel
 echo "adding $username to wheel, audio, video, optical, and storage groups"
 usermod -aG wheel,audio,video,optical,storage $username
 echo "$username was succesfully added to the following groups:"
@@ -46,37 +46,6 @@ echo "members of wheel group added to use sudo"
 echo "enableing dhcpcd.service"
 systemctl enable dhcpcd
 echo "If you need wifi support, remember to install iwd!"
-echo "installing dwm, st and start.py"
-mv /System/start.py /opt
-cd /opt
-echo "cloning dwm git repository..."
-git clone https://git.suckless.org/st
-echo "cloning st git repository..."
-echo "replacing config.h files with my personalized configurations..."
-rm dwm/config.h st/config.h
-mv /System/dwm_config.h /opt/dwm/config.h
-mv /System/st_config.h /opt/st/config.h
-echo "done"
-pacman -S make
-cd /opt/dwm
-make install
-echo "dwm installation complete"
-cd /opt/st
-make install
-echo "st installation complete"
-echo "exec dwm" > /home/$username/.xinitrc
-echo "xinit configured to launch dwm"
-pacman -S python
-echo "python /opt/start.py" > /home/$username/.bash_login
-echo "bash_login configured to use start.py for easy xinit launching"
-echo "cloning from AUR: Yay, Brave Browser"
-echo "NOTHING WILL BE INSTALLED YET!"
-echo "Return to /opt/brave-bin and /opt/yay-git once you are logged in as $username"
-echo "Then execute: sudo makepkg -si"
-echo "This is because you cannot run makepkg as the root user. Remeber to chmod these directories first."
-cd /opt
-git clone https://aur.archlinux.org/yay-git.git
-git clone https://aur.archlinux.org/brave-bin.git
 echo "installing grub..."
 sudo pacman -S grub
 echo "After grub configuration, Crtl + D or type 'exit' to exit chroot."
