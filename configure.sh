@@ -35,7 +35,7 @@ passwd $username
 echo "installing git, xorg, xinit, vim, sudo, feh, OpenJDK JRE 11, OpenJDK JDK 11, base-devel, and dhcpcd..."
 pacman -S git
 pacman -S xorg
-pacman -S xinit
+pacman -S xorg-xinit
 pacman -S vim
 pacman -S sudo
 pacman -S dhcpcd
