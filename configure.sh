@@ -57,7 +57,7 @@ systemctl enable dhcpcd
 systemctl enable iwd
 echo "installing grub..."
 sudo pacman -S grub
-read -p "Enter your installation partition, this could be something like /dev/sda, not something like /dev/sda1" partition
+read -p "Enter your installation partition, this could be something like /dev/sda, NOT something like /dev/sda1: " partition
 echo "finishing grub installation"
 grub-install $partition
 echo "Adding grub configuration file /boot/grub/grub.cfg"
