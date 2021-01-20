@@ -32,8 +32,17 @@ useradd -m $username
 echo "set passwd for $username"
 passwd $username
 # Edit the following lines if you don't like my software choices
-echo "installing git, xorg, xinit, vim, sudo, feh, OpenJDK JRE 11, OpenJDK JDK 11, base-devel, and dhcpcd...
-pacman -S git, xorg xinit vim sudo dhcpcp jre11-openjdk jdk11-openjdk base-devel
+echo "installing git, xorg, xinit, vim, sudo, feh, OpenJDK JRE 11, OpenJDK JDK 11, base-devel, and dhcpcd..."
+pacman -S git
+pacman -S xorg
+pacman -S xinit
+pacman -S vim
+pacman -S sudo
+pacman -S dhcpcd
+pacman -S jre11-openjdk
+pacman -S jdk11-openjdk
+pacman -S base-devel
+pacman -S iwd
 echo "adding $username to wheel, audio, video, optical, and storage groups"
 usermod -aG wheel,audio,video,optical,storage $username
 echo "$username was succesfully added to the following groups:"
@@ -43,14 +52,13 @@ echo "configuring sudoers file..."
 sed -i "/wheel ALL=(ALL) NOPASSWD/s/^#//g" /etc/sudoers
 #sed -i "/wheel ALL=(ALL) ALL/s/^#//g" /etc/sudoers
 echo "members of wheel group added to use sudo"
-echo "enableing dhcpcd.service"
+echo "enableing dhcpcd.service and iwd.service"
 systemctl enable dhcpcd
-echo "If you need wifi support, remember to install iwd!"
+systemctl enable iwd
 echo "installing grub..."
 sudo pacman -S grub
-echo "After grub configuration, Crtl + D or type 'exit' to exit chroot."
-echo "You will then be able to reboot. but make sure that your grub configuration runs proberly first!"
-echo "configuring grub..."
-# I have left this until the end because there is quite often some troubleshooting involved.
-# Usually these are fixed by specifying the boot partition path.
+read -p "Enter your installation partition, this could be something like /dev/sda, not something like /dev/sda1" partition
+echo "finishing grub installation"
+grub-install $partition
+echo "Adding grub configuration file /boot/grub/grub.cfg"
 grub-mkconfig -o /boot/grub/grub.cfg
