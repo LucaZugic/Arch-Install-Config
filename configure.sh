@@ -24,7 +24,7 @@ echo -e "127.0.0.1         localhost\n::1               localhost\n127.0.1.1    
 echo "done"
 # Edit following 2 lines if not using Intel processor
 echo "installing intel processor microcode..."
-sudo pacman -S intel-ucode
+pacman -S intel-ucode
 echo "set root passwd"
 passwd
 read -p "Set your username: " username
@@ -32,11 +32,9 @@ useradd -m $username
 echo "set passwd for $username"
 passwd $username
 # Edit the following lines if you don't like my software choices
-echo "installing git, xorg, xinit, vim, sudo, feh, OpenJDK JRE 11, OpenJDK JDK 11, base-devel, and dhcpcd..."
-pacman -S git
+echo "installing xorg, xinit, vim, sudo, feh, OpenJDK JRE 11, OpenJDK JDK 11, base-devel, and dhcpcd..."
 pacman -S xorg
 pacman -S xorg-xinit
-pacman -S vim
 pacman -S sudo
 pacman -S dhcpcd
 pacman -S jre11-openjdk
