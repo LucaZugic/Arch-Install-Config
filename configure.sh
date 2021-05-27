@@ -54,7 +54,7 @@ echo "enableing dhcpcd.service and iwd.service"
 systemctl enable dhcpcd
 systemctl enable iwd
 echo "installing grub..."
-sudo pacman -S grub
+pacman -S grub
 read -p "Enter your installation partition, this could be something like /dev/sda, NOT something like /dev/sda1: " partition
 echo "finishing grub installation"
 grub-install $partition
